@@ -24,25 +24,24 @@
     body { font-family: 'Open Sans', sans-serif; background: var(--bg-main); color: var(--text-main); font-size: 13px; line-height: 1.4; }
 
     /* Layout Structure */
-    .app-container { display: flex; flex-direction: column; width: 1440px; height: 900px; overflow: hidden; }
+    .app-container { display: flex; flex-direction: column; width: 1440px; height: 1000px; overflow: hidden; }
     .main-layout { display: flex; flex: 1; overflow: hidden; }
 
     /* Header */
-    .header { height: 56px; background: var(--header-bg); display: flex; align-items: center; padding: 0 20px; justify-content: space-between; color: white; }
+    .header { height: 56px; background: var(--header-bg); display: flex; align-items: center; padding: 0 20px; justify-content: space-between; color: white; flex-shrink: 0; }
     .header-left { display: flex; align-items: center; gap: 15px; }
     .logo-box { width: 32px; height: 32px; background: var(--sage-green); display: flex; align-items: center; justify-content: center; font-family: 'Nunito Sans'; font-weight: 700; color: white; border-radius: 2px; font-size: 18px; }
     .brand-name { font-family: 'Nunito Sans'; font-weight: 700; font-size: 14px; color: #FFFFFF; }
-    .search-bar { background: rgba(255,255,255,0.1); border: none; width: 400px; padding: 8px 15px; border-radius: 4px; color: white; }
+    .search-bar { background: rgba(255,255,255,0.15); border: none; width: 400px; padding: 8px 15px; border-radius: 4px; color: white; font-size: 12px; }
     .header-right { display: flex; align-items: center; gap: 20px; }
-    .user-info { display: flex; align-items: center; gap: 10px; font-size: 12px; }
-    .avatar { width: 32px; height: 32px; background: #5C6BC0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; }
+    .avatar-circle { width: 32px; height: 32px; background: #5C6BC0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; color: white; }
 
     /* Sidebar */
-    .sidebar { width: 240px; background: var(--white); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow-y: auto; padding-top: 10px; }
-    .nav-item { padding: 10px 20px; color: var(--text-sec); display: flex; align-items: center; gap: 12px; cursor: pointer; border-left: 3px solid transparent; }
+    .sidebar { width: 240px; background: var(--white); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow-y: auto; flex-shrink: 0; }
+    .nav-section { font-size: 10px; color: var(--text-tert); text-transform: uppercase; padding: 15px 20px 5px; font-weight: 700; letter-spacing: 0.5px; }
+    .nav-item { padding: 10px 20px; color: var(--text-sec); display: flex; align-items: center; gap: 12px; cursor: pointer; }
     .nav-item.active { background: #EAF3DE; color: var(--sage-dark); border-left: 3px solid var(--sage-green); font-weight: 600; }
-    .nav-section { font-size: 11px; color: var(--text-tert); text-transform: uppercase; padding: 15px 20px 5px; font-weight: 700; }
-    .nav-sub { padding: 8px 20px 8px 45px; font-size: 12px; color: var(--text-sec); }
+    .nav-sub { padding: 6px 20px 6px 45px; font-size: 12px; color: var(--text-sec); cursor: pointer; }
 
     /* Content Area */
     .content-wrapper { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
@@ -55,39 +54,44 @@
 
     /* KPI Cards */
     .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .kpi-card { background: var(--white); padding: 20px; border-radius: 4px; border: 1px solid var(--border); display: flex; flex-direction: column; }
-    .kpi-label { font-size: 12px; color: var(--text-tert); margin-bottom: 8px; }
+    .kpi-card { background: var(--white); padding: 20px; border-radius: 4px; border: 1px solid var(--border); display: flex; flex-direction: column; position: relative; }
+    .kpi-label { font-size: 12px; color: var(--text-tert); margin-bottom: 8px; font-weight: 600; }
     .kpi-value { font-size: 24px; font-weight: 700; font-family: 'Nunito Sans'; }
-    .kpi-badge { font-size: 11px; padding: 2px 6px; border-radius: 10px; font-weight: 600; align-self: flex-start; margin-top: 8px; }
-    .badge-red { background: #FEE2E2; color: #991B1B; }
-    .badge-green { background: #DCFCE7; color: #166534; }
+    .kpi-badge { font-size: 11px; padding: 2px 6px; border-radius: 10px; font-weight: 600; margin-top: 8px; width: fit-content; }
+    .badge-red { background: #FEE2E2; color: #B91C1C; }
+    .badge-green { background: #DCFCE7; color: #15803D; }
 
-    /* Sections Row 2 */
+    /* Row 2 Sections */
     .row-2 { display: grid; grid-template-columns: 6fr 4fr; gap: 20px; }
-    .panel { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 16px; }
-    .alert-banner { border-radius: 4px; padding: 12px; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; border-left: 4px solid; }
+    .panel { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 20px; }
+    .panel-title { font-size: 14px; font-weight: 700; margin-bottom: 15px; display: flex; justify-content: space-between; }
+    
+    .alert-banner { border-radius: 4px; padding: 12px; margin-bottom: 12px; border-left: 4px solid; position: relative; }
     .alert-urgent { background: #FFF1F2; border-left-color: var(--p1-red); }
     .alert-warning { background: #FFFBEB; border-left-color: var(--p2-amber); }
-    .sla-bar { height: 4px; background: #E5E7EB; border-radius: 2px; width: 100%; overflow: hidden; margin-top: 5px; }
+    
+    .sla-track { height: 4px; background: #E5E7EB; border-radius: 2px; width: 100%; margin: 8px 0; overflow: hidden; }
     .sla-fill { height: 100%; }
 
-    /* Table */
+    /* Table Sage Style */
     .table-container { background: var(--white); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
-    .data-table { width: 100%; border-collapse: collapse; text-align: left; }
+    .data-table { width: 100%; border-collapse: collapse; }
     .data-table thead { background: var(--header-bg); color: white; }
-    .data-table th { padding: 12px 16px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
-    .data-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-    .ticket-id { font-family: 'Roboto Mono', monospace; font-size: 12px; color: var(--text-tert); }
-    .status-tag { padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; border: 1px solid; }
+    .data-table th { padding: 12px 16px; font-size: 11px; font-weight: 600; text-transform: uppercase; text-align: left; letter-spacing: 0.5px; }
+    .data-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 12px; vertical-align: middle; }
+    .ticket-id { font-family: 'Roboto Mono', monospace; font-weight: 400; color: var(--text-main); }
+    
+    .status-pill { padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; border: 1px solid; display: inline-block; }
+
+    /* Graph Volume */
+    .bar-chart { display: flex; align-items: flex-end; gap: 15px; height: 100px; padding-top: 20px; }
+    .bar { background: var(--sage-green); width: 30px; border-radius: 2px 2px 0 0; position: relative; }
+    .bar-label { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 10px; color: var(--text-tert); }
 
     /* Buttons */
-    .btn-primary { background: var(--sage-green); color: white; padding: 10px 20px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; }
-    .filter-group { display: flex; background: var(--bg-sec); border-radius: 4px; padding: 2px; }
-    .filter-btn { padding: 6px 12px; border: none; background: transparent; font-size: 12px; cursor: pointer; }
-    .filter-btn.active { background: white; border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-weight: 600; }
-
-    /* Progress bar in table */
-    .mini-sla { font-family: 'Roboto Mono', monospace; font-size: 11px; display: flex; align-items: center; gap: 5px; }
+    .btn-primary { background: var(--sage-green); color: white; padding: 8px 16px; border: none; border-radius: 4px; font-weight: 600; font-family: 'Nunito Sans'; cursor: pointer; }
+    .btn-filter { padding: 6px 12px; border: 1px solid var(--border); background: var(--white); font-size: 12px; cursor: pointer; }
+    .btn-filter.active { background: var(--bg-sec); font-weight: 600; border-color: var(--text-tert); }
   </style>
 </head>
 <body>
@@ -101,13 +105,14 @@
       <input type="text" class="search-bar" placeholder="Rechercher une fonction, un ticket, un client...">
     </div>
     <div class="header-right">
-      <div style="display: flex; gap: 15px; font-size: 18px;">🔔 ⚙️ ❓</div>
-      <div class="user-info">
+      <div style="display: flex; gap: 18px; font-size: 18px; align-items: center;">🎧 🤖 📅 ⭐ 🕒</div>
+      <div style="width: 1px; height: 24px; background: rgba(255,255,255,0.2); margin: 0 10px;"></div>
+      <div style="display: flex; align-items: center; gap: 10px;">
         <div style="text-align: right;">
-          <div style="font-weight: 600;">Jean-Baptiste Kamga</div>
-          <div style="font-size: 10px; color: #CBD5E1;">Technicien IT Senior</div>
+          <div style="font-size: 12px; font-weight: 600;">Jean-Baptiste Kamga</div>
+          <div style="font-size: 10px; color: #CBD5E1;">Technicien Support</div>
         </div>
-        <div class="avatar">JK</div>
+        <div class="avatar-circle">JK</div>
       </div>
     </div>
   </header>
@@ -116,29 +121,31 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="nav-item">🏠 Accueil</div>
-      <div class="nav-section">Gestion ERP</div>
+      
+      <div class="nav-section">Exploitation</div>
       <div class="nav-item">📊 Finance</div>
       <div class="nav-item">🛒 Achats</div>
+      <div class="nav-item">📈 Ventes</div>
       <div class="nav-item">📦 Stocks</div>
       <div class="nav-item">🏭 Production</div>
       <div class="nav-item">👥 RH</div>
-      
-      <div class="nav-section">Support & Maintenance</div>
+
+      <div class="nav-section">Support technique</div>
       <div class="nav-item active">🎧 ITSM — Support IT</div>
-      <div class="nav-sub">• Tableau de bord</div>
-      <div class="nav-sub">• Mes Tickets</div>
-      <div class="nav-sub">• File d'attente</div>
+      <div class="nav-sub" style="color: var(--sage-dark); font-weight: 600;">• Tableau de bord</div>
+      <div class="nav-sub">• Mes Tickets assignés</div>
       <div class="nav-sub">• Base de connaissances</div>
-      
+      <div class="nav-sub">• Incidents critiques</div>
+
       <div class="nav-section">Administration</div>
-      <div class="nav-item">🛠 Infrastructure</div>
-      <div class="nav-item">🛡 Sécurité</div>
+      <div class="nav-item">🖥 Infrastructure</div>
+      <div class="nav-item">🔐 Sécurité</div>
     </aside>
 
-    <!-- MAIN CONTENT AREA -->
+    <!-- CONTENT AREA -->
     <div class="content-wrapper">
       <div class="breadcrumb">
-        Accueil &nbsp;›&nbsp; ITSM — Support IT &nbsp;›&nbsp; <span style="color: var(--text-main); font-weight: 600; margin-left: 5px;">Tableau de bord</span>
+        Accueil &nbsp;›&nbsp; ITSM — Support IT &nbsp;›&nbsp; <span style="font-weight: 600; color: var(--text-main); margin-left: 4px;">Tableau de bord</span>
       </div>
 
       <main class="main-content">
@@ -148,13 +155,13 @@
             <h1>Tableau de bord — Support IT</h1>
             <div class="subtitle">Bienvenue Jean-Baptiste — 29 avril 2025</div>
           </div>
-          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
             <button class="btn-primary">+ Nouveau ticket</button>
-            <div class="filter-group">
-              <button class="filter-btn">Aujourd'hui</button>
-              <button class="filter-btn active">7 jours ✓</button>
-              <button class="filter-btn">30 jours</button>
-              <button class="filter-btn">Personnalisé</button>
+            <div style="display: flex;">
+              <button class="btn-filter" style="border-radius: 4px 0 0 4px;">Aujourd'hui</button>
+              <button class="btn-filter active">7 jours ✓</button>
+              <button class="btn-filter">30 jours</button>
+              <button class="btn-filter" style="border-radius: 0 4px 4px 0;">Personnalisé</button>
             </div>
           </div>
         </div>
@@ -183,53 +190,56 @@
           </div>
         </div>
 
-        <!-- Urgent Alerts & Donut -->
+        <!-- Row 2: Alerts & Donut -->
         <div class="row-2">
           <div class="panel">
-            <h3 style="font-size: 14px; font-weight: 700;">Alertes SLA actives</h3>
+            <div class="panel-title">Alertes SLA actives</div>
             
             <div class="alert-banner alert-urgent">
-              <div style="display: flex; justify-content: space-between; font-weight: 700; color: var(--p1-red);">
-                <span>🔴 INC-2025-0851 — P1 Critique</span>
-                <span>Traiter maintenant →</span>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <span style="font-weight: 700; color: var(--p1-red);">🔴 INC-2025-0851 — P1 Critique</span>
+                <span style="font-size: 11px; font-weight: 600; color: var(--p1-red); cursor: pointer;">Traiter maintenant →</span>
               </div>
-              <div style="font-weight: 600;">Validation bon achat impossible</div>
-              <div style="font-size: 11px;">SLA dépassé dans <strong>1h 05m</strong></div>
-              <div class="sla-bar"><div class="sla-fill" style="width: 85%; background: var(--p1-red);"></div></div>
+              <div style="font-weight: 600; font-size: 13px;">Validation bon achat impossible</div>
+              <div style="font-size: 11px; color: var(--text-sec); margin-top: 4px;">SLA dépassé dans <strong>1h 05m</strong></div>
+              <div class="sla-track"><div class="sla-fill" style="width: 85%; background: var(--p1-red);"></div></div>
             </div>
 
             <div class="alert-banner alert-warning">
-              <div style="display: flex; justify-content: space-between; font-weight: 700; color: #B45309;">
-                <span>🟡 INC-2025-0847 — P2 Majeur</span>
-                <span>Voir le ticket →</span>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <span style="font-weight: 700; color: #B45309;">🟡 INC-2025-0847 — P2 Majeur</span>
+                <span style="font-size: 11px; font-weight: 600; color: #B45309; cursor: pointer;">Voir le ticket →</span>
               </div>
-              <div style="font-weight: 600;">Export PDF Finance</div>
-              <div style="font-size: 11px;">SLA dans <strong>4h 12m</strong></div>
-              <div class="sla-bar"><div class="sla-fill" style="width: 40%; background: var(--p2-amber);"></div></div>
+              <div style="font-weight: 600; font-size: 13px;">Export PDF Finance</div>
+              <div style="font-size: 11px; color: var(--text-sec); margin-top: 4px;">SLA dans <strong>4h 12m</strong></div>
+              <div class="sla-track"><div class="sla-fill" style="width: 40%; background: var(--p2-amber);"></div></div>
             </div>
           </div>
 
           <div class="panel">
-            <h3 style="font-size: 14px; font-weight: 700; margin-bottom: 20px;">Répartition par module</h3>
-            <div style="display: flex; align-items: center; justify-content: space-around;">
+            <div class="panel-title">Répartition par module</div>
+            <div style="display: flex; align-items: center; justify-content: space-around; height: 120px;">
               <!-- Simulated Donut -->
-              <div style="width: 120px; height: 120px; border-radius: 50%; border: 20px solid var(--sage-green); border-left-color: #0F6E56; border-bottom-color: #EAF3DE; display: flex; align-items: center; justify-content: center; font-weight: 700;">ITSM</div>
-              <div style="font-size: 11px; display: flex; flex-direction: column; gap: 5px;">
+              <div style="width: 100px; height: 100px; border-radius: 50%; border: 15px solid var(--sage-green); border-left-color: var(--sage-dark); border-bottom-color: var(--bg-sec); position: relative; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px;">
+                100%
+              </div>
+              <div style="font-size: 11px; display: flex; flex-direction: column; gap: 4px;">
                 <div><span style="color: var(--sage-green);">●</span> Finance 34%</div>
                 <div><span style="color: var(--sage-dark);">●</span> Achats 22%</div>
-                <div><span style="color: #4ADE80;">●</span> Stocks 18%</div>
-                <div><span style="color: #BBF7D0;">●</span> Autre 26%</div>
+                <div><span style="color: #6EE7B7);">●</span> Stocks 18%</div>
+                <div><span style="color: #A7F3D0);">●</span> Production 14%</div>
+                <div><span style="color: #D1FAE5);">●</span> Autre 12%</div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Main Table -->
+        <!-- Row 3: Assigned Tickets Table -->
         <div class="table-container">
           <table class="data-table">
             <thead>
               <tr>
-                <th style="width: 40px;"><input type="checkbox"></th>
+                <th style="width: 40px; text-align: center;"><input type="checkbox"></th>
                 <th>N° Ticket</th>
                 <th>Titre</th>
                 <th>Module</th>
@@ -241,65 +251,79 @@
             </thead>
             <tbody>
               <tr>
-                <td><input type="checkbox"></td>
+                <td style="text-align: center;"><input type="checkbox"></td>
                 <td class="ticket-id">INC-2025-0851</td>
-                <td>Validation bon achat impossible</td>
+                <td style="font-weight: 600;">Validation bon achat impossible</td>
                 <td>Achats</td>
-                <td><span style="color: var(--p1-red); font-weight: bold;">🔴 P1</span></td>
-                <td><span class="status-tag" style="background: #FEE2E2; border-color: var(--p1-red); color: var(--p1-red);">Escaladé</span></td>
-                <td><div class="mini-sla">██░░░░ 1h05m</div></td>
+                <td><span style="color: var(--p1-red); font-weight: 700;">🔴 P1</span></td>
+                <td><span class="status-pill" style="background: #FEE2E2; color: var(--p1-red); border-color: var(--p1-red);">Escaladé</span></td>
+                <td><span style="font-family: 'Roboto Mono';">██░░░░ 1h05m</span></td>
                 <td>👁 ✏</td>
               </tr>
               <tr>
-                <td><input type="checkbox"></td>
+                <td style="text-align: center;"><input type="checkbox"></td>
                 <td class="ticket-id">INC-2025-0847</td>
-                <td>Export PDF factures inopérant</td>
+                <td style="font-weight: 600;">Export PDF factures inopérant</td>
                 <td>Finance</td>
-                <td><span style="color: var(--p2-amber); font-weight: bold;">🟡 P2</span></td>
-                <td><span class="status-tag" style="background: #FEF3C7; border-color: var(--p2-amber); color: #B45309;">En cours</span></td>
-                <td><div class="mini-sla">████░░ 4h12m</div></td>
+                <td><span style="color: var(--p2-amber); font-weight: 700;">🟡 P2</span></td>
+                <td><span class="status-pill" style="background: #FEF3C7; color: #B45309; border-color: var(--p2-amber);">En cours</span></td>
+                <td><span style="font-family: 'Roboto Mono';">████░░ 4h12m</span></td>
                 <td>👁 ✏</td>
               </tr>
               <tr>
-                <td><input type="checkbox"></td>
+                <td style="text-align: center;"><input type="checkbox"></td>
                 <td class="ticket-id">INC-2025-0838</td>
-                <td>Champ TVA mal calculé</td>
+                <td style="font-weight: 600;">Champ TVA mal calculé</td>
                 <td>Finance</td>
-                <td><span style="color: var(--p3-green); font-weight: bold;">🟢 P3</span></td>
-                <td><span class="status-tag" style="background: #DBEAFE; border-color: #3B82F6; color: #1E40AF;">Ouvert</span></td>
-                <td><div class="mini-sla">██████ 2j14h</div></td>
+                <td><span style="color: var(--p3-green); font-weight: 700;">🟢 P3</span></td>
+                <td><span class="status-pill" style="background: #DBEAFE; color: #1E40AF; border-color: #3B82F6;">Ouvert</span></td>
+                <td><span style="font-family: 'Roboto Mono';">██████ 2j14h</span></td>
                 <td>👁 ✏</td>
               </tr>
               <tr>
-                <td><input type="checkbox"></td>
+                <td style="text-align: center;"><input type="checkbox"></td>
                 <td class="ticket-id">INC-2025-0829</td>
-                <td>Lenteur module stocks</td>
+                <td style="font-weight: 600;">Lenteur module stocks</td>
                 <td>Stocks</td>
-                <td><span style="color: var(--p2-amber); font-weight: bold;">🟡 P2</span></td>
-                <td><span class="status-tag" style="background: #FEF3C7; border-color: var(--p2-amber); color: #B45309;">En cours</span></td>
-                <td><div class="mini-sla">████░░ 5h22m</div></td>
+                <td><span style="color: var(--p2-amber); font-weight: 700;">🟡 P2</span></td>
+                <td><span class="status-pill" style="background: #FEF3C7; color: #B45309; border-color: var(--p2-amber);">En cours</span></td>
+                <td><span style="font-family: 'Roboto Mono';">████░░ 5h22m</span></td>
                 <td>👁 ✏</td>
               </tr>
               <tr style="background: #F9FAFB;">
-                <td><input type="checkbox"></td>
+                <td style="text-align: center;"><input type="checkbox"></td>
                 <td class="ticket-id">INC-2025-0821</td>
-                <td>Erreur import fournisseurs</td>
-                <td>Achats</td>
-                <td><span style="color: var(--p3-green); font-weight: bold;">🟢 P3</span></td>
-                <td><span class="status-tag" style="background: #DCFCE7; border-color: var(--p3-green); color: #166534;">✅ Résolu</span></td>
+                <td style="font-weight: 600; color: var(--text-tert);">Erreur import fournisseurs</td>
+                <td style="color: var(--text-tert);">Achats</td>
+                <td><span style="color: var(--text-tert); font-weight: 700;">🟢 P3</span></td>
+                <td><span class="status-pill" style="background: #DCFCE7; color: #166534; border-color: var(--p3-green);">✅ Résolu</span></td>
                 <td style="color: var(--text-tert);">Résolu</td>
                 <td>👁 ✏</td>
               </tr>
             </tbody>
           </table>
           <div style="padding: 12px 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 12px; color: var(--text-tert);">
-            <span>Affichage 5 sur 23 tickets</span>
+            <span>Affichage 6 sur 23 tickets</span>
             <span style="color: var(--sage-green); font-weight: 600; cursor: pointer;">Voir tous les tickets →</span>
           </div>
         </div>
 
-        <!-- Footer Info -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 20px;">
+        <!-- Row 4: Volume Chart -->
+        <div class="panel">
+          <div class="panel-title">Volume tickets — 7 derniers jours</div>
+          <div class="bar-chart">
+            <div class="bar" style="height: 52px;"><span class="bar-label">Lun 21</span></div>
+            <div class="bar" style="height: 78px;"><span class="bar-label">Mar 22</span></div>
+            <div class="bar" style="height: 39px;"><span class="bar-label">Mer 23</span></div>
+            <div class="bar" style="height: 100px;"><span class="bar-label">Jeu 24</span></div>
+            <div class="bar" style="height: 65px;"><span class="bar-label">Ven 25</span></div>
+            <div class="bar" style="height: 17px;"><span class="bar-label">Sam 26</span></div>
+            <div class="bar" style="height: 9px;"><span class="bar-label">Dim 27</span></div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-bottom: 20px;">
           <div style="font-size: 11px; color: var(--text-tert);">Dernière mise à jour : il y a 3 min — <span style="text-decoration: underline; cursor: pointer;">[↻ Actualiser]</span></div>
           <div style="font-size: 10px; color: var(--text-tert);">Système Sage X3 V12.0.32 — Environnement Production</div>
         </div>

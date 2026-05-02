@@ -1,382 +1,325 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Open+Sans:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --sage-green: #00B050;
-      --sage-dark: #0F6E56;
-      --bg-main: #F5F5F0;
-      --header-bg: #2E4057;
-      --text-main: #2E4057;
-      --text-sec: #444444;
-      --text-tert: #6B6B6B;
-      --border: #D9D9D6;
-      --white: #FFFFFF;
-      --p1-red: #D32F2F;
-      --p2-amber: #F59E0B;
-      --p3-green: #10B981;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sage-green: #00B050;
+            --sage-green-dark: #008E41;
+            --header-dark: #2E4057;
+            --sidebar-bg: #FFFFFF;
+            --main-bg: #F5F5F0;
+            --text-main: #2E4057;
+            --text-sec: #57677A;
+            --border-color: #D9D9D6;
+            --white: #FFFFFF;
+            --p1-red: #D32F2F;
+            --p2-amber: #F59E0B;
+            --p3-green: #10B981;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Open Sans', sans-serif; background: var(--bg-main); color: var(--text-main); font-size: 13px; line-height: 1.2; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Source Sans Pro', sans-serif; background: var(--main-bg); color: var(--text-main); overflow-x: hidden; width: 1440px; }
 
-    /* Layout */
-    .app-wrapper { width: 1440px; height: 1100px; display: flex; flex-direction: column; overflow: hidden; }
-    .main-container { display: flex; flex: 1; overflow: hidden; }
+        /* Layout Structure */
+        .app-container { display: flex; height: 100vh; width: 1440px; }
 
-    /* Header Perfection */
-    .header { height: 56px; background: var(--header-bg); display: flex; align-items: center; padding: 0 24px; justify-content: space-between; flex-shrink: 0; }
-    .header-brand { display: flex; align-items: center; gap: 12px; }
-    .logo-square { width: 32px; height: 32px; background: var(--sage-green); color: white; display: flex; align-items: center; justify-content: center; font-family: 'Nunito Sans'; font-weight: 800; border-radius: 2px; font-size: 18px; }
-    .brand-text { color: white; font-family: 'Nunito Sans'; font-weight: 700; font-size: 16px; letter-spacing: 0.5px; }
-    .header-user { display: flex; align-items: center; gap: 12px; color: white; }
-    .avatar-jk { width: 34px; height: 34px; background: #5C6BC0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; border: 2px solid rgba(255,255,255,0.2); font-size: 12px; }
+        /* Sidebar - Sage X3 V12 Design */
+        .sidebar { width: 240px; background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; flex-shrink: 0; z-index: 10; }
+        .sidebar-header { height: 60px; display: flex; align-items: center; padding: 0 20px; background: var(--header-dark); border-bottom: 3px solid var(--sage-green); }
+        .sidebar-logo { color: var(--white); font-weight: 700; font-size: 18px; letter-spacing: 0.5px; }
+        
+        .sidebar-nav { flex: 1; overflow-y: auto; padding: 10px 0; }
+        .nav-group { padding: 12px 20px 6px; font-size: 11px; font-weight: 700; color: #9AA5B1; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-item { padding: 9px 20px; display: flex; align-items: center; font-size: 13.5px; color: var(--text-sec); cursor: pointer; transition: 0.2s; border-left: 3px solid transparent; }
+        .nav-item:hover { background: #F0F4F8; }
+        .nav-item.active { background: #E6F6EC; color: var(--sage-green-dark); font-weight: 600; border-left-color: var(--sage-green); }
+        .nav-sub-item { padding: 8px 20px 8px 45px; font-size: 13px; color: var(--text-sec); cursor: pointer; }
+        .nav-sub-item.active { color: var(--sage-green-dark); font-weight: 700; background: #F8FAF5; }
 
-    /* Sidebar - Realistic Enterprise Density */
-    .sidebar { width: 260px; background: var(--white); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow-y: auto; flex-shrink: 0; }
-    .nav-section-title { font-size: 10px; font-weight: 800; color: var(--text-tert); text-transform: uppercase; padding: 20px 24px 8px; letter-spacing: 1px; }
-    .nav-link { padding: 10px 24px; display: flex; align-items: center; gap: 12px; color: var(--text-sec); cursor: pointer; transition: 0.2s; }
-    .nav-link:hover { background: #F8F8F6; }
-    .nav-link.active { background: #EAF3DE; color: var(--sage-dark); border-left: 4px solid var(--sage-green); font-weight: 600; padding-left: 20px; }
-    .sub-nav { padding: 6px 24px 6px 52px; font-size: 12px; color: var(--text-sec); cursor: pointer; }
-    .sub-nav.active { color: var(--sage-green); font-weight: 700; }
+        /* Main Section */
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        
+        /* Top Header */
+        .top-header { height: 60px; background: var(--white); border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; flex-shrink: 0; }
+        .breadcrumb { font-size: 12px; color: var(--text-sec); display: flex; gap: 8px; }
+        .user-block { display: flex; align-items: center; gap: 12px; }
+        .user-info { text-align: right; }
+        .user-name { font-weight: 700; font-size: 14px; display: block; }
+        .avatar { width: 34px; height: 34px; background: #EC407A; color: white; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 700; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 
-    /* Content Area */
-    .viewport { flex: 1; overflow-y: auto; display: flex; flex-direction: column; }
-    .breadcrumb-bar { height: 36px; background: var(--white); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 32px; font-size: 11px; color: var(--text-tert); gap: 8px; }
-    .content-padding { padding: 32px; display: flex; flex-direction: column; gap: 32px; }
+        /* Content Area */
+        .dashboard-body { padding: 25px 30px; }
+        
+        .tabs-bar { display: flex; border-bottom: 1px solid var(--border-color); margin-bottom: 25px; gap: 5px; }
+        .tab { padding: 10px 24px; font-size: 14px; font-weight: 600; color: var(--text-sec); cursor: pointer; border-bottom: 3px solid transparent; }
+        .tab.active { color: var(--sage-green-dark); border-bottom-color: var(--sage-green); background: #FFFFFF; }
 
-    /* Typography & Top Row */
-    .page-header { display: flex; justify-content: space-between; align-items: flex-start; }
-    h1 { font-family: 'Nunito Sans'; font-weight: 800; font-size: 24px; color: var(--text-main); }
-    .subtitle { color: var(--text-tert); font-size: 14px; margin-top: 4px; }
-    .action-group { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
-    .btn-sage-primary { background: var(--sage-green); color: white; padding: 10px 20px; border-radius: 4px; border: none; font-family: 'Nunito Sans'; font-weight: 700; cursor: pointer; font-size: 13px; }
-    .filter-tabs { display: flex; background: white; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
-    .filter-tab { padding: 6px 16px; border-right: 1px solid var(--border); font-size: 12px; font-weight: 600; cursor: pointer; }
-    .filter-tab.active { background: #EEECEA; color: var(--text-main); }
+        .page-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        h1 { font-size: 24px; font-weight: 700; color: var(--text-main); }
+        .subtitle { font-size: 14px; color: var(--text-sec); }
+        .actions-row { display: flex; gap: 10px; }
+        .btn { padding: 8px 16px; border-radius: 4px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid var(--border-color); background: white; transition: 0.2s; }
+        .btn:hover { background: #F9F9F9; }
+        .btn-icon { display: flex; align-items: center; gap: 8px; }
+        
+        .filters-strip { display: flex; gap: 12px; margin-top: 15px; }
+        .filter-select { padding: 6px 12px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 12px; background: white; min-width: 120px; }
 
-    /* KPI Grid */
-    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .kpi-card { background: white; padding: 24px; border: 1px solid var(--border); border-radius: 4px; display: flex; flex-direction: column; gap: 8px; position: relative; }
-    .kpi-label { font-size: 12px; font-weight: 700; color: var(--text-tert); text-transform: uppercase; letter-spacing: 0.5px; }
-    .kpi-value { font-family: 'Nunito Sans'; font-weight: 800; font-size: 28px; }
-    .kpi-footer { display: flex; align-items: center; gap: 8px; }
-    .pill-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 12px; }
-    .pill-red { background: #FEE2E2; color: #B91C1C; }
-    .pill-green { background: #DCFCE7; color: #166534; }
+        /* Grid System */
+        .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
+        .kpi-card { background: white; padding: 20px; border-radius: 4px; border: 1px solid var(--border-color); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .kpi-label { font-size: 12px; font-weight: 700; color: var(--text-sec); text-transform: uppercase; margin-bottom: 8px; }
+        .kpi-value { font-size: 28px; font-weight: 700; display: block; margin-bottom: 6px; }
+        .badge { display: inline-flex; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+        .badge-green { background: #E6F6EC; color: #008E41; }
+        .badge-amber { background: #FFF7E6; color: #B45309; }
+        .badge-gray { background: #F1F5F9; color: #64748B; }
 
-    /* Mid Row Sections */
-    .mid-row { display: grid; grid-template-columns: 6fr 4fr; gap: 24px; }
-    .panel { background: white; border: 1px solid var(--border); border-radius: 4px; padding: 24px; }
-    .panel-header { font-family: 'Nunito Sans'; font-weight: 700; font-size: 15px; margin-bottom: 20px; color: var(--text-main); }
-    
-    .sla-banner { border-radius: 4px; padding: 16px; margin-bottom: 12px; position: relative; border-left: 4px solid; }
-    .banner-red { background: #FFF1F2; border-left-color: var(--p1-red); }
-    .banner-amber { background: #FFFBEB; border-left-color: var(--p2-amber); }
-    .sla-meta { font-size: 11px; font-weight: 700; margin-top: 8px; display: flex; justify-content: space-between; }
-    .sla-progress-bg { height: 4px; background: rgba(0,0,0,0.05); border-radius: 2px; width: 100%; margin-top: 4px; overflow: hidden; }
-    .sla-progress-fill { height: 100%; border-radius: 2px; }
+        .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .panel { background: white; padding: 20px; border-radius: 4px; border: 1px solid var(--border-color); height: 260px; }
+        .panel-header { font-weight: 700; font-size: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; }
 
-    /* Table Realism */
-    .table-container { background: white; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
-    .sage-table { width: 100%; border-collapse: collapse; }
-    .sage-table thead { background: var(--header-bg); color: white; }
-    .sage-table th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-    .sage-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 12px; font-weight: 600; }
-    .ticket-no { font-family: 'Roboto Mono'; font-weight: 400; color: #1E40AF; }
-    .status-tag { padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; border: 1px solid; }
+        /* Table Design */
+        .table-panel { background: white; border: 1px solid var(--border-color); border-radius: 4px; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { background: #F8FAFC; padding: 12px 20px; font-size: 11px; font-weight: 700; color: #64748B; text-transform: uppercase; border-bottom: 2px solid var(--border-color); }
+        td { padding: 14px 20px; font-size: 13.5px; border-bottom: 1px solid #F1F5F9; }
+        .progress-bar-bg { width: 120px; height: 6px; background: #E2E8F0; border-radius: 3px; }
+        .progress-bar-fill { height: 100%; border-radius: 3px; }
 
-    /* Bar Chart Area */
-    .bar-chart-container { display: flex; align-items: flex-end; justify-content: space-between; height: 120px; padding: 20px 40px 0; border-top: 1px solid #F0F0F0; }
-    .bar-wrapper { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; }
-    .bar-fill { background: var(--sage-green); width: 32px; border-radius: 2px 2px 0 0; }
-    .bar-label { font-size: 10px; font-weight: 700; color: var(--text-tert); }
+        /* Timeline */
+        .timeline-container { display: flex; gap: 15px; margin-top: 10px; }
+        .timeline-card { flex: 1; padding: 15px; border-radius: 4px; background: #FEF2F2; border-left: 4px solid var(--p1-red); }
+        .incident-id { font-family: 'Roboto Mono', monospace; font-size: 12px; font-weight: 700; color: var(--p1-red); }
+        .incident-time { font-size: 11px; color: #991B1B; margin-top: 5px; }
 
-    /* Footer */
-    .app-footer { padding: 16px 32px; color: var(--text-tert); font-size: 11px; display: flex; justify-content: space-between; }
-  </style>
+        /* Visual Chart Simulation */
+        .chart-sim { height: 140px; display: flex; align-items: flex-end; gap: 40px; padding: 10px 40px; }
+        .bar-sim { flex: 1; background: var(--sage-green); border-radius: 2px 2px 0 0; opacity: 0.8; position: relative; }
+        .bar-sim::after { content: attr(data-val); position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 11px; font-weight: 700; }
+    </style>
 </head>
 <body>
 
-<div class="app-wrapper">
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-brand">
-      <div class="logo-square">S</div>
-      <span class="brand-text">Sage X3</span>
-    </div>
-    <div style="background: rgba(255,255,255,0.1); border-radius: 4px; width: 480px; height: 32px; display: flex; align-items: center; padding: 0 12px; color: #CBD5E1; font-size: 12px;">
-      Rechercher une fonction, un ticket, un client...
-    </div>
-    <div class="header-user">
-      <div style="text-align: right">
-        <div style="font-weight: 700; font-size: 13px;">Jean-Baptiste Kamga</div>
-        <div style="font-size: 10px; color: #CBD5E1;">Technicien IT Senior</div>
-      </div>
-      <div class="avatar-jk">JK</div>
-    </div>
-  </header>
-
-  <div class="main-container">
+<div class="app-container">
     <!-- SIDEBAR -->
     <aside class="sidebar">
-      <div class="nav-link">🏠 Accueil</div>
-      
-      <div class="nav-section-title">Gestion de l'Entreprise</div>
-      <div class="nav-link">💰 Finance</div>
-      <div class="nav-link">🛒 Achats</div>
-      <div class="nav-link">📈 Ventes</div>
-      <div class="nav-link">📦 Stocks</div>
-      <div class="nav-link">🏭 Production</div>
-      <div class="nav-link">👥 RH</div>
+        <div class="sidebar-header">
+            <span class="sidebar-logo">Sage X3</span>
+        </div>
+        <div class="sidebar-nav">
+            <div class="nav-item">🏠 Accueil</div>
+            
+            <div class="nav-group">Modules ERP</div>
+            <div class="nav-item">💰 Finance</div>
+            <div class="nav-item">🛒 Achats</div>
+            <div class="nav-item">📊 Ventes</div>
+            <div class="nav-item">📦 Stocks</div>
+            <div class="nav-item">🏭 Production</div>
+            <div class="nav-item">👥 Ressources Humaines</div>
 
-      <div class="nav-section-title">Support & Service</div>
-      <div class="nav-link active">🎧 ITSM — Support IT</div>
-      <div class="sub-nav active">• Tableau de bord</div>
-      <div class="sub-nav">• Mes tickets assignés</div>
-      <div class="sub-nav">• Base de connaissances</div>
-      <div class="sub-nav">• Catalogues de services</div>
-      <div class="sub-nav">• Files d'attente</div>
+            <div class="nav-group">IT Service Management</div>
+            <div class="nav-item active">🎧 ITSM — Support IT</div>
+            <div class="nav-sub-item active">• Tableau de bord</div>
+            <div class="nav-sub-item">• Mes incidents</div>
+            <div class="nav-sub-item">• Catalogue de services</div>
+            <div class="nav-sub-item">• Rapports SLA</div>
 
-      <div class="nav-section-title">Administration</div>
-      <div class="nav-link">💻 Infrastructure</div>
-      <div class="nav-link">🔐 Sécurité</div>
+            <div class="nav-group">Administration</div>
+            <div class="nav-item">🔌 Infrastructure</div>
+            <div class="nav-item">🛡️ Sécurité</div>
+            <div class="nav-item">⚙️ Paramétrage</div>
+        </div>
     </aside>
 
-    <!-- CONTENT -->
-    <div class="viewport">
-      <div class="breadcrumb-bar">
-        Accueil <span>›</span> ITSM — Support IT <span>›</span> <span style="color: var(--text-main); font-weight: 700;">Tableau de bord</span>
-      </div>
-
-      <main class="content-padding">
-        <div class="page-header">
-          <div>
-            <h1>Tableau de bord — Support IT</h1>
-            <div class="subtitle">Bienvenue Jean-Baptiste — 29 avril 2025</div>
-          </div>
-          <div class="action-group">
-            <button class="btn-sage-primary">+ Nouveau ticket</button>
-            <div class="filter-tabs">
-              <div class="filter-tab">Aujourd'hui</div>
-              <div class="filter-tab active">7 jours ✓</div>
-              <div class="filter-tab">30 jours</div>
-              <div class="filter-tab" style="border-right: none;">Personnalisé</div>
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <header class="top-header">
+            <div class="breadcrumb">
+                <span>Accueil</span> › <span>ITSM — Support IT</span> › <span style="font-weight:700; color: var(--text-main);">Tableau de bord Manager</span>
             </div>
-          </div>
+            <div class="user-block">
+                <div class="user-info">
+                    <span class="user-name">Sylvie Martin</span>
+                    <span style="font-size: 11px; color: var(--text-sec);">Manager DSI</span>
+                </div>
+                <div class="avatar">SM</div>
+            </div>
+        </header>
+
+        <div class="dashboard-body">
+            <div class="tabs-bar">
+                <div class="tab">Vue Technicien</div>
+                <div class="tab active">Vue Manager ✓</div>
+                <div class="tab">Vue Globale</div>
+            </div>
+
+            <div class="page-title-row">
+                <div>
+                    <h1>Tableau de bord — Support IT</h1>
+                    <span class="subtitle">Vue Manager — Sylvie Martin</span>
+                    <div class="filters-strip">
+                        <select class="filter-select"><option>Avril 2025</option></select>
+                        <select class="filter-select"><option>Toutes équipes</option></select>
+                        <select class="filter-select"><option>Tous modules</option></select>
+                    </div>
+                </div>
+                <div class="actions-row">
+                    <button class="btn btn-icon">📄 Exporter PDF</button>
+                    <button class="btn btn-icon">📊 Exporter Excel</button>
+                </div>
+            </div>
+
+            <!-- KPI SECTION -->
+            <div class="kpi-row">
+                <div class="kpi-card">
+                    <span class="kpi-label">MTTR global</span>
+                    <span class="kpi-value">3h 42m</span>
+                    <span class="badge badge-green">↓12% vs mois dernier</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-label">FCR (1er contact)</span>
+                    <span class="kpi-value">72,4 %</span>
+                    <span class="badge badge-green">↑3,1%</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-label">SLA compliance P1</span>
+                    <span class="kpi-value">98,1 %</span>
+                    <span class="badge badge-green">stable</span>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi-card">
+                    <span class="kpi-label">SLA compliance P2</span>
+                    <span class="kpi-value">91,3 %</span>
+                    <span class="badge badge-amber">↓2,4%</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-label">Volume total 30j</span>
+                    <span class="kpi-value">234 tickets</span>
+                    <span class="badge badge-gray">Neutre</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-label">CSAT moyen</span>
+                    <span class="kpi-value">4,2 / 5 ★</span>
+                    <span class="badge badge-green">↑0,3</span>
+                </div>
+            </div>
+
+            <!-- CHARTS SECTION -->
+            <div class="charts-row">
+                <div class="panel">
+                    <div class="panel-header">Évolution MTTR — 3 derniers mois</div>
+                    <div class="chart-sim">
+                        <div class="bar-sim" style="height: 100%; background: #CBD5E1;" data-val="5h12"></div>
+                        <div class="bar-sim" style="height: 85%; background: #94A3B8;" data-val="4h23"></div>
+                        <div class="bar-sim" style="height: 70%; background: var(--p3-green);" data-val="3h42"></div>
+                    </div>
+                    <div style="display:flex; justify-content:space-around; margin-top:10px; font-size:12px; color:var(--text-sec);">
+                        <span>Février</span><span>Mars</span><span>Avril</span>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header">SLA compliance par équipe</div>
+                    <div style="display:flex; flex-direction:column; gap:12px; margin-top:10px;">
+                        <div>
+                            <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;"><span>Finance</span><span>96%</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:96%; background:var(--p3-green);"></div></div>
+                        </div>
+                        <div>
+                            <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;"><span>Achats</span><span>88%</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:88%; background:var(--p2-amber);"></div></div>
+                        </div>
+                        <div>
+                            <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;"><span>Infrastructure</span><span>99%</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:99%; background:var(--p3-green);"></div></div>
+                        </div>
+                        <div>
+                            <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:4px;"><span>RH</span><span>94%</span></div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:94%; background:var(--p3-green);"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABLE SECTION -->
+            <div class="table-panel">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Tickets 30j</th>
+                            <th>Variation</th>
+                            <th>% du total</th>
+                            <th>Barre de progression</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Finance</strong></td>
+                            <td>89</td>
+                            <td style="color:var(--p1-red); font-weight:700;">↑12%</td>
+                            <td>38%</td>
+                            <td><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:38%; background:var(--p3-green);"></div></div></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Achats</strong></td>
+                            <td>54</td>
+                            <td style="color:var(--p3-green); font-weight:700;">↓3%</td>
+                            <td>23%</td>
+                            <td><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:23%; background:var(--p2-amber);"></div></div></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stocks</strong></td>
+                            <td>41</td>
+                            <td style="color:var(--p1-red); font-weight:700;">↑5%</td>
+                            <td>18%</td>
+                            <td><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:18%; background:var(--p3-green);"></div></div></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Production</strong></td>
+                            <td>32</td>
+                            <td style="color:var(--p3-green); font-weight:700;">↓8%</td>
+                            <td>14%</td>
+                            <td><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:14%; background:var(--p3-green);"></div></div></td>
+                        </tr>
+                        <tr>
+                            <td><strong>RH</strong></td>
+                            <td>18</td>
+                            <td style="color:var(--text-sec);">0%</td>
+                            <td>8%</td>
+                            <td><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:8%; background:var(--p3-green);"></div></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- TIMELINE SECTION -->
+            <div class="panel" style="height: auto;">
+                <div class="panel-header">Incidents P1 du mois — Résolutions Majeures</div>
+                <div class="timeline-container">
+                    <div class="timeline-card">
+                        <span class="incident-id">INC-2025-0851</span>
+                        <div style="font-weight:700; font-size:13px; margin-top:5px;">Indisponibilité Base de Données</div>
+                        <div class="incident-time">Résolution : <strong>4h12m</strong></div>
+                    </div>
+                    <div class="timeline-card">
+                        <span class="incident-id">INC-2025-0832</span>
+                        <div style="font-weight:700; font-size:13px; margin-top:5px;">Rupture Flux EDI Client</div>
+                        <div class="incident-time">Résolution : <strong>3h45m</strong></div>
+                    </div>
+                    <div class="timeline-card">
+                        <span class="incident-id">INC-2025-0804</span>
+                        <div style="font-weight:700; font-size:13px; margin-top:5px;">Blocage Interface Paie</div>
+                        <div class="incident-time">Résolution : <strong>5h18m</strong></div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- KPI ROW -->
-        <div class="kpi-grid">
-          <div class="kpi-card">
-            <span class="kpi-label">Tickets ouverts</span>
-            <span class="kpi-value">23</span>
-            <div class="kpi-footer">
-              <span class="pill-badge pill-red">+3 aujourd'hui</span>
-            </div>
-          </div>
-          <div class="kpi-card">
-            <span class="kpi-label">MTTR moyen</span>
-            <span class="kpi-value">3h 42m</span>
-            <div class="kpi-footer">
-              <span class="pill-badge pill-green">↓ 12%</span>
-            </div>
-          </div>
-          <div class="kpi-card">
-            <span class="kpi-label">SLA compliance</span>
-            <span class="kpi-value">94,2 %</span>
-            <div class="kpi-footer">
-              <span class="pill-badge pill-green">↑ 1,2%</span>
-            </div>
-          </div>
-          <div class="kpi-card">
-            <span class="kpi-label">Tickets résolus (30j)</span>
-            <span class="kpi-value">187</span>
-            <div class="kpi-footer">
-              <span class="pill-badge pill-green">↑ 8%</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- MID ROW: SLA & DONUT -->
-        <div class="mid-row">
-          <div class="panel">
-            <div class="panel-header">Alertes SLA actives</div>
-            
-            <div class="sla-banner banner-red">
-              <div style="display: flex; justify-content: space-between; font-weight: 800;">
-                <span style="color: var(--p1-red);">🔴 INC-2025-0851 — P1 Critique</span>
-                <span style="color: var(--p1-red); cursor: pointer;">Traiter maintenant →</span>
-              </div>
-              <div style="font-size: 13px; font-weight: 600; margin-top: 4px;">Validation bon achat impossible</div>
-              <div class="sla-meta">
-                <span>SLA dépassé dans 1h 05m</span>
-                <span>85% du temps écoulé</span>
-              </div>
-              <div class="sla-progress-bg"><div class="sla-progress-fill" style="width: 85%; background: var(--p1-red);"></div></div>
-            </div>
-
-            <div class="sla-banner banner-amber">
-              <div style="display: flex; justify-content: space-between; font-weight: 800;">
-                <span style="color: #B45309;">🟡 INC-2025-0847 — P2 Majeur</span>
-                <span style="color: #B45309; cursor: pointer;">Voir le ticket →</span>
-              </div>
-              <div style="font-size: 13px; font-weight: 600; margin-top: 4px;">Export PDF Finance</div>
-              <div class="sla-meta">
-                <span>SLA dans 4h 12m</span>
-                <span>40% du temps écoulé</span>
-              </div>
-              <div class="sla-progress-bg"><div class="sla-progress-fill" style="width: 40%; background: var(--p2-amber);"></div></div>
-            </div>
-          </div>
-
-          <div class="panel" style="display: flex; flex-direction: column;">
-            <div class="panel-header">Répartition par module</div>
-            <div style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 32px;">
-              <!-- Donut Mockup with CSS -->
-              <div style="width: 120px; height: 120px; border-radius: 50%; border: 18px solid var(--sage-green); border-left-color: var(--sage-dark); border-bottom-color: #A7F3D0; position: relative; display: flex; align-items: center; justify-content: center;">
-                <span style="font-family: 'Nunito Sans'; font-weight: 800; font-size: 18px;">100%</span>
-              </div>
-              <div style="font-size: 11px; font-weight: 700; color: var(--text-sec); display: flex; flex-direction: column; gap: 8px;">
-                <div><span style="color: var(--sage-green);">■</span> Finance 34%</div>
-                <div><span style="color: var(--sage-dark);">■</span> Achats 22%</div>
-                <div><span style="color: #10B981;">■</span> Stocks 18%</div>
-                <div><span style="color: #A7F3D0;">■</span> Production 14%</div>
-                <div><span style="color: #F0FDF4;">■</span> Autres 12%</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- TABLE: Mes tickets assignés -->
-        <div class="table-container">
-          <table class="sage-table">
-            <thead>
-              <tr>
-                <th style="width: 40px; text-align: center;"><input type="checkbox"></th>
-                <th>N° Ticket</th>
-                <th>Titre</th>
-                <th>Module</th>
-                <th>Priorité</th>
-                <th>Statut</th>
-                <th>SLA Restant</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="text-align: center;"><input type="checkbox"></td>
-                <td class="ticket-no">INC-2025-0851</td>
-                <td>Validation bon achat impossible</td>
-                <td>Achats</td>
-                <td style="color: var(--p1-red);">🔴 P1</td>
-                <td><span class="status-tag" style="background: #FEE2E2; color: var(--p1-red); border-color: var(--p1-red);">Escaladé</span></td>
-                <td style="font-family: 'Roboto Mono'; font-size: 11px;">██░░░░░░ 1h05m</td>
-                <td>👁 ✏</td>
-              </tr>
-              <tr>
-                <td style="text-align: center;"><input type="checkbox"></td>
-                <td class="ticket-no">INC-2025-0847</td>
-                <td>Export PDF factures inopérant</td>
-                <td>Finance</td>
-                <td style="color: var(--p2-amber);">🟡 P2</td>
-                <td><span class="status-tag" style="background: #FFFBEB; color: #B45309; border-color: var(--p2-amber);">En cours</span></td>
-                <td style="font-family: 'Roboto Mono'; font-size: 11px;">████░░░░ 4h12m</td>
-                <td>👁 ✏</td>
-              </tr>
-              <tr>
-                <td style="text-align: center;"><input type="checkbox"></td>
-                <td class="ticket-no">INC-2025-0838</td>
-                <td>Champ TVA mal calculé</td>
-                <td>Finance</td>
-                <td style="color: var(--p3-green);">🟢 P3</td>
-                <td><span class="status-tag" style="background: #EFF6FF; color: #1E40AF; border-color: #3B82F6;">Ouvert</span></td>
-                <td style="font-family: 'Roboto Mono'; font-size: 11px;">████████ 2j14h</td>
-                <td>👁 ✏</td>
-              </tr>
-              <tr>
-                <td style="text-align: center;"><input type="checkbox"></td>
-                <td class="ticket-no">INC-2025-0829</td>
-                <td>Lenteur module stocks</td>
-                <td>Stocks</td>
-                <td style="color: var(--p2-amber);">🟡 P2</td>
-                <td><span class="status-tag" style="background: #FFFBEB; color: #B45309; border-color: var(--p2-amber);">En cours</span></td>
-                <td style="font-family: 'Roboto Mono'; font-size: 11px;">████░░░░ 5h22m</td>
-                <td>👁 ✏</td>
-              </tr>
-              <tr style="background: #F9FAFB;">
-                <td style="text-align: center;"><input type="checkbox"></td>
-                <td class="ticket-no" style="color: var(--text-tert);">INC-2025-0821</td>
-                <td style="color: var(--text-tert);">Erreur import fournisseurs</td>
-                <td style="color: var(--text-tert);">Achats</td>
-                <td style="color: var(--text-tert);">🟢 P3</td>
-                <td><span class="status-tag" style="background: #DCFCE7; color: #166534; border-color: var(--p3-green);">✅ Résolu</span></td>
-                <td style="color: var(--text-tert);">Résolu</td>
-                <td>👁 ✏</td>
-              </tr>
-              <tr style="background: #F9FAFB;">
-                <td style="text-align: center;"><input type="checkbox"></td>
-                <td class="ticket-no" style="color: var(--text-tert);">INC-2025-0815</td>
-                <td style="color: var(--text-tert);">Configuration imprimante</td>
-                <td style="color: var(--text-tert);">Infra</td>
-                <td style="color: var(--text-tert);">🟢 P3</td>
-                <td><span class="status-tag" style="background: #DCFCE7; color: #166534; border-color: var(--p3-green);">✅ Résolu</span></td>
-                <td style="color: var(--text-tert);">Résolu</td>
-                <td>👁 ✏</td>
-              </tr>
-            </tbody>
-          </table>
-          <div style="padding: 12px 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 11px; font-weight: 700; color: var(--text-tert);">Affichage 6 sur 23 tickets</span>
-            <span style="font-size: 11px; font-weight: 800; color: var(--sage-green); cursor: pointer;">Voir tous les tickets →</span>
-          </div>
-        </div>
-
-        <!-- VOLUME CHART -->
-        <div class="panel">
-          <div class="panel-header">Volume tickets — 7 derniers jours</div>
-          <div class="bar-chart-container">
-            <div class="bar-wrapper">
-              <div class="bar-fill" style="height: 52px;"></div>
-              <span class="bar-label">Lun 21</span>
-            </div>
-            <div class="bar-wrapper">
-              <div class="bar-fill" style="height: 78px;"></div>
-              <span class="bar-label">Mar 22</span>
-            </div>
-            <div class="bar-wrapper">
-              <div class="bar-fill" style="height: 39px;"></div>
-              <span class="bar-label">Mer 23</span>
-            </div>
-            <div class="bar-wrapper">
-              <div class="bar-fill" style="height: 100px;"></div>
-              <span class="bar-label" style="color: var(--text-main);">Jeu 24</span>
-            </div>
-            <div class="bar-wrapper">
-              <div class="bar-fill" style="height: 65px;"></div>
-              <span class="bar-label">Ven 25</span>
-            </div>
-            <div class="bar-wrapper">
-              <div class="bar-fill" style="height: 17px;"></div>
-              <span class="bar-label">Sam 26</span>
-            </div>
-            <div class="bar-wrapper">
-              <div class="bar-fill" style="height: 9px;"></div>
-              <span class="bar-label">Dim 27</span>
-            </div>
-          </div>
-        </div>
-      </main>
-
-      <footer class="app-footer">
-        <div>Dernière mise à jour : il y a 3 min — <strong>[↻ Actualiser]</strong></div>
-        <div>Version 12.0.32 - Environment: Production</div>
-      </footer>
     </div>
-  </div>
 </div>
 
 </body>

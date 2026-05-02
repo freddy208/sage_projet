@@ -2,591 +2,307 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Sage X3 — Tableau de bord ITSM</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Open+Sans:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0;}
-html,body{width:1440px;height:900px;overflow:hidden;background:#F5F5F0;}
-body{font-family:'Open Sans',sans-serif;font-size:12px;color:#2E4057;}
+<title>Tableau de bord ITSM</title>
 
-/* SHELL */
-.shell{display:flex;flex-direction:column;width:1440px;height:900px;overflow:hidden;}
+<style>
+body {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  background: #F5F5F0;
+  color: #2E4057;
+}
 
 /* HEADER */
-.hdr{height:56px;background:#2E4057;display:flex;align-items:center;padding:0 18px;gap:14px;flex-shrink:0;}
-.logo{display:flex;align-items:center;gap:8px;width:220px;flex-shrink:0;}
-.logo-sq{width:28px;height:28px;background:#00B050;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:15px;color:#fff;flex-shrink:0;}
-.logo-txt{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:14px;color:#FFFFFF;white-space:nowrap;}
-.hdr-search{flex:1;max-width:400px;position:relative;}
-.hdr-search input{width:100%;height:30px;background:rgba(255,255,255,0.11);border:1px solid rgba(255,255,255,0.18);border-radius:4px;padding:0 10px 0 30px;color:#fff;font-size:11px;font-family:'Open Sans',sans-serif;outline:none;}
-.hdr-search input::placeholder{color:rgba(255,255,255,0.4);}
-.hdr-search svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:12px;height:12px;stroke:rgba(255,255,255,0.4);fill:none;stroke-width:2;}
-.hdr-right{display:flex;align-items:center;gap:16px;margin-left:auto;}
-.hico{display:flex;align-items:center;gap:4px;color:rgba(255,255,255,0.7);font-size:11px;cursor:pointer;}
-.hico:hover{color:#fff;}
-.hico svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
-.hdiv{width:1px;height:22px;background:rgba(255,255,255,0.15);}
-.avatar{width:30px;height:30px;border-radius:50%;background:#00B050;display:flex;align-items:center;justify-content:center;font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:11px;color:#fff;border:2px solid rgba(255,255,255,0.2);flex-shrink:0;}
-.hdr-username{font-size:12px;color:rgba(255,255,255,0.88);font-weight:600;white-space:nowrap;}
+.header {
+  height: 56px;
+  background: #2E4057;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
 
-/* BODY */
-.body{display:flex;flex:1;overflow:hidden;}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-box {
+  width: 24px;
+  height: 24px;
+  background: #00B050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.header-right {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* LAYOUT */
+.layout {
+  display: flex;
+}
 
 /* SIDEBAR */
-.sb{width:220px;background:#fff;border-right:1px solid #D9D9D6;flex-shrink:0;overflow-y:auto;display:flex;flex-direction:column;}
-.sb::-webkit-scrollbar{width:3px;}
-.sb::-webkit-scrollbar-thumb{background:#D9D9D6;}
-.sb-grp{border-bottom:1px solid #F0EFEC;padding:3px 0;}
-.sb-lbl{font-size:9.5px;color:#9B9B93;font-family:'Nunito Sans',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:7px 12px 2px;}
-.sb-i{display:flex;align-items:center;gap:8px;padding:6px 12px;cursor:pointer;font-size:11.5px;color:#444;border-left:3px solid transparent;position:relative;}
-.sb-i:hover{background:#F5F5F0;}
-.sb-i svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0;}
-.sb-i.active{background:#EAF3DE;color:#0F6E56;font-weight:600;border-left-color:#00B050;padding-left:9px;}
-.sb-i.active svg{stroke:#00B050;}
-.sb-bdg{margin-left:auto;background:#E24B4A;color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:8px;}
-.sb-sub{padding:4px 12px 4px 34px;font-size:11px;color:#6B6B6B;cursor:pointer;border-left:3px solid transparent;}
-.sb-sub:hover{color:#2E4057;background:#F8F8F5;}
-.sb-sub.active{color:#0F6E56;font-weight:600;border-left-color:#00B050;background:#F0F9E8;}
-.sb-sub .cnt{color:#E24B4A;font-weight:700;margin-left:3px;}
+.sidebar {
+  width: 240px;
+  background: #FFFFFF;
+  border-right: 1px solid #D9D9D6;
+  padding: 15px;
+}
 
-/* MAIN */
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+.menu-item {
+  padding: 8px 10px;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
 
-/* BREADCRUMB */
-.bc{height:30px;background:#F5F5F0;border-bottom:1px solid #D9D9D6;display:flex;align-items:center;padding:0 18px;gap:5px;font-size:11px;color:#6B6B6B;flex-shrink:0;}
-.bc-link{color:#6B6B6B;cursor:pointer;}
-.bc-link:hover{color:#00B050;}
-.bc-sep{color:#C5C4BC;}
-.bc-active{color:#2E4057;font-weight:600;}
+.active {
+  background: #EAF3DE;
+  color: #0F6E56;
+  border-left: 3px solid #00B050;
+}
 
 /* CONTENT */
-.ct{flex:1;overflow-y:auto;padding:14px 18px 10px;background:#F5F5F0;}
-.ct::-webkit-scrollbar{width:4px;}
-.ct::-webkit-scrollbar-thumb{background:#D0CFCA;border-radius:2px;}
+.content {
+  flex: 1;
+  padding: 20px;
+}
 
-/* PAGE HDR */
-.pg-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;}
-.pg-title{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:18px;color:#2E4057;line-height:1.2;}
-.pg-sub{font-size:11px;color:#6B6B6B;margin-top:2px;}
-.pg-acts{display:flex;align-items:center;gap:8px;}
-.flt-grp{display:flex;gap:3px;}
-.flt-btn{padding:5px 10px;border:1px solid #D9D9D6;border-radius:4px;background:#fff;font-size:11px;color:#444;cursor:pointer;font-family:'Open Sans',sans-serif;}
-.flt-btn.on{background:#2E4057;color:#fff;border-color:#2E4057;}
-.btn-primary{background:#00B050;color:#fff;border:none;border-radius:4px;padding:7px 14px;font-size:12px;font-weight:600;font-family:'Open Sans',sans-serif;cursor:pointer;display:flex;align-items:center;gap:5px;white-space:nowrap;}
+/* BREADCRUMB */
+.breadcrumb {
+  height: 32px;
+  font-size: 13px;
+  color: #6B6B6B;
+  margin-bottom: 10px;
+}
+
+/* HEADER PAGE */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  font-family: "Nunito Sans";
+  font-size: 22px;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #6B6B6B;
+}
+
+.button {
+  background: #00B050;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
 
 /* KPI */
-.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px;}
-.kpi{background:#fff;border:1px solid #D9D9D6;border-radius:6px;padding:12px 13px;}
-.kpi-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;}
-.kpi-lbl{font-size:10px;color:#6B6B6B;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;line-height:1.3;max-width:110px;}
-.kpi-ico{width:28px;height:28px;border-radius:5px;background:#EAF3DE;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.kpi-ico svg{width:14px;height:14px;stroke:#00B050;fill:none;stroke-width:2;}
-.kpi-ico.red{background:#FCEBEB;}
-.kpi-ico.red svg{stroke:#E24B4A;}
-.kpi-val{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:24px;color:#2E4057;line-height:1;margin-bottom:5px;}
-.bdg{display:inline-flex;align-items:center;gap:2px;font-size:10px;font-weight:600;padding:2px 7px;border-radius:9px;}
-.bdg-red{background:#FCEBEB;color:#A32D2D;}
-.bdg-green{background:#EAF3DE;color:#3B6D11;}
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
 
-/* ROW2 */
-.row2{display:grid;grid-template-columns:59fr 41fr;gap:10px;margin-bottom:10px;}
-.card{background:#fff;border:1px solid #D9D9D6;border-radius:6px;padding:11px 13px;}
-.card-ttl{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:12px;color:#2E4057;margin-bottom:9px;display:flex;align-items:center;gap:6px;}
-.ttl-dot{width:7px;height:7px;border-radius:50%;background:#00B050;flex-shrink:0;}
+.kpi {
+  background: white;
+  padding: 15px;
+  border: 1px solid #D9D9D6;
+}
 
-/* ALERTS */
-.alert{border-radius:4px;padding:8px 11px;margin-bottom:7px;display:flex;align-items:center;gap:9px;}
-.a-red{background:#FEF2F2;border-left:4px solid #E24B4A;}
-.a-amb{background:#FFFBF0;border-left:4px solid #EF9F27;}
-.a-info{flex:1;min-width:0;}
-.a-row1{display:flex;align-items:center;gap:7px;margin-bottom:2px;}
-.a-id{font-family:'Roboto Mono',monospace;font-size:10.5px;}
-.a-red .a-id{color:#A32D2D;}
-.a-amb .a-id{color:#854F0B;}
-.pill{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;}
-.pill-red{background:#FCEBEB;color:#A32D2D;}
-.pill-amb{background:#FAEEDA;color:#854F0B;}
-.a-title{font-size:11.5px;font-weight:600;color:#2E4057;margin-bottom:3px;}
-.a-sla{font-size:10.5px;color:#6B6B6B;margin-bottom:4px;}
-.sla-bar{height:3px;background:#EEECEA;border-radius:2px;overflow:hidden;}
-.sla-fill{height:100%;border-radius:2px;}
-.f-red{background:#E24B4A;width:18%;}
-.f-amb{background:#EF9F27;width:46%;}
-.btn-xs{flex-shrink:0;padding:5px 11px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;font-family:'Open Sans',sans-serif;}
-.btn-danger{background:#E24B4A;color:#fff;}
-.btn-out{background:transparent;border:1px solid #D9D9D6;color:#2E4057;}
+.kpi-value {
+  font-size: 20px;
+  font-weight: bold;
+}
 
-/* DONUT */
-.donut-wrap{display:flex;align-items:center;gap:12px;}
-.legend{display:flex;flex-direction:column;gap:5px;flex:1;}
-.leg-i{display:flex;align-items:center;gap:6px;font-size:11px;color:#444;}
-.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.leg-pct{margin-left:auto;font-weight:600;color:#2E4057;font-size:11px;}
+/* ROW 2 */
+.row {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.alert {
+  padding: 12px;
+  margin-bottom: 10px;
+  background: white;
+  border: 1px solid #D9D9D6;
+}
+
+.alert.red {
+  border-left: 4px solid red;
+}
+
+.alert.orange {
+  border-left: 4px solid orange;
+}
 
 /* TABLE */
-.tbl-card{background:#fff;border:1px solid #D9D9D6;border-radius:6px;overflow:hidden;margin-bottom:10px;}
-.tbl-hdr{padding:9px 13px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #EEECEA;}
-.tbl-ttl{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:12px;color:#2E4057;display:flex;align-items:center;gap:6px;}
-.tbl-acts{display:flex;gap:6px;}
-.tbl-btn{padding:4px 9px;border:1px solid #D9D9D6;border-radius:3px;background:#fff;font-size:10.5px;color:#444;cursor:pointer;display:flex;align-items:center;gap:3px;}
-.tbl-btn svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;}
-table{width:100%;border-collapse:collapse;table-layout:fixed;}
-thead tr{background:#2E4057;}
-thead th{padding:7px 10px;text-align:left;font-size:10px;font-weight:600;color:#fff;text-transform:uppercase;letter-spacing:0.3px;white-space:nowrap;overflow:hidden;}
-tbody tr{border-bottom:1px solid #F0EFEC;}
-tbody tr:last-child{border-bottom:none;}
-tbody tr:hover{background:#FAFAF8;}
-tbody td{padding:6px 10px;font-size:11px;color:#444;vertical-align:middle;overflow:hidden;}
-.mono{font-family:'Roboto Mono',monospace;font-size:10px;color:#2E4057;font-weight:400;}
-.td-title{font-size:11px;color:#2E4057;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.mod-tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600;background:#EEECEA;color:#444;}
-.pb{display:inline-flex;align-items:center;gap:2px;padding:2px 6px;border-radius:3px;font-size:10px;font-weight:600;}
-.pb-p1{background:#FCEBEB;color:#A32D2D;}
-.pb-p2{background:#FAEEDA;color:#854F0B;}
-.pb-p3{background:#EAF3DE;color:#3B6D11;}
-.stb{display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:3px;font-size:10px;font-weight:600;}
-.st-esc{background:#FCEBEB;color:#A32D2D;}
-.st-enc{background:#FAEEDA;color:#854F0B;}
-.st-ouv{background:#E6F1FB;color:#185FA5;}
-.st-res{background:#EAF3DE;color:#3B6D11;}
-.st-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
-.d-red{background:#E24B4A;}
-.d-amb{background:#EF9F27;}
-.d-blu{background:#378ADD;}
-.d-grn{background:#00B050;}
-.sla-cell{display:flex;align-items:center;gap:6px;}
-.sla-wrap{flex:1;height:4px;background:#EEECEA;border-radius:2px;overflow:hidden;}
-.sla-m{height:100%;border-radius:2px;}
-.sla-t{font-size:10px;color:#6B6B6B;white-space:nowrap;}
-.sla-ok{font-size:10px;color:#3B6D11;font-weight:600;}
-.ra{display:flex;gap:4px;}
-.ra-btn{width:22px;height:22px;border:1px solid #D9D9D6;border-radius:3px;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;}
-.ra-btn:hover{background:#F5F5F0;}
-.ra-btn svg{width:11px;height:11px;stroke:#6B6B6B;fill:none;stroke-width:2;}
-.tbl-ftr{padding:7px 13px;font-size:11px;color:#6B6B6B;border-top:1px solid #F0EFEC;display:flex;align-items:center;justify-content:space-between;}
-.lnk{color:#00B050;font-weight:600;cursor:pointer;}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
 
-/* BAR CHART */
-.chart-card{background:#fff;border:1px solid #D9D9D6;border-radius:6px;padding:11px 13px;margin-bottom:7px;}
-.chart-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
-.chart-ttl{font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:12px;color:#2E4057;display:flex;align-items:center;gap:6px;}
-.bars{display:flex;align-items:flex-end;gap:0;height:72px;border-bottom:1px solid #EEECEA;}
-.bar-col{display:flex;flex-direction:column;align-items:center;flex:1;gap:2px;justify-content:flex-end;}
-.bar-v{font-size:9.5px;font-weight:600;color:#2E4057;}
-.bar-r{width:28px;border-radius:2px 2px 0 0;}
-.bar-l{font-size:9.5px;color:#6B6B6B;margin-top:4px;}
-.chart-leg{display:flex;gap:12px;margin-top:5px;}
-.cl-i{display:flex;align-items:center;gap:4px;font-size:10px;color:#6B6B6B;}
-.cl-dot{width:7px;height:7px;border-radius:50%;}
+thead {
+  background: #2E4057;
+  color: white;
+}
+
+td, th {
+  padding: 8px;
+  font-size: 13px;
+  border-bottom: 1px solid #D9D9D6;
+}
 
 /* FOOTER */
-.pg-ftr{display:flex;align-items:center;justify-content:flex-end;gap:8px;font-size:10.5px;color:#B0B0A8;}
-.ref-btn{color:#00B050;font-weight:600;cursor:pointer;border:none;background:none;font-size:10.5px;}
-
-/* COL WIDTHS */
-.c-chk{width:28px;}
-.c-id{width:120px;}
-.c-ttl{width:200px;}
-.c-mod{width:80px;}
-.c-prio{width:90px;}
-.c-stat{width:90px;}
-.c-sla{width:120px;}
-.c-act{width:58px;}
+.footer {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #6B6B6B;
+}
 </style>
+
 </head>
+
 <body>
-<div class="shell">
 
-<!-- HEADER -->
-<header class="hdr">
+<div class="header">
   <div class="logo">
-    <div class="logo-sq">S</div>
-    <span class="logo-txt">Sage X3</span>
+    <div class="logo-box">S</div>
+    <div>Sage X3</div>
   </div>
-  <div class="hdr-search">
-    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-    <input type="text" placeholder="Rechercher un ticket, module, utilisateur...">
+  <div class="header-right">
+    <div>🔍</div>
+    <div>📅 29/04/2025</div>
+    <div>JK</div>
   </div>
-  <div class="hdr-right">
-    <span class="hico">
-      <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-      ITSM
-    </span>
-    <span class="hico">
-      <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 4.5-7 13-7 13S5 13.5 5 9a7 7 0 017-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-    </span>
-    <span class="hico">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      29 avr. 2025
-    </span>
-    <span class="hico">
-      <svg viewBox="0 0 24 24"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-    </span>
-    <span class="hico">
-      <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-    </span>
-    <div class="hdiv"></div>
-    <div class="avatar">JK</div>
-    <span class="hdr-username">Jean-Baptiste Kamga</span>
-    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-  </div>
-</header>
+</div>
 
-<div class="body">
+<div class="layout">
 
 <!-- SIDEBAR -->
-<nav class="sb">
-  <div class="sb-grp">
-    <div class="sb-i">
-      <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-      Accueil
+<div class="sidebar">
+  <div class="menu-item">Accueil</div>
+  <div class="menu-item">Finance</div>
+  <div class="menu-item">Achats</div>
+  <div class="menu-item">Ventes</div>
+  <div class="menu-item">Stocks</div>
+  <div class="menu-item">Production</div>
+  <div class="menu-item">RH</div>
+  <div class="menu-item">Infrastructure</div>
+  <div class="menu-item">Sécurité</div>
+
+  <div class="menu-item active">ITSM</div>
+  <div class="menu-item">→ Tableau de bord</div>
+  <div class="menu-item">→ Tickets</div>
+  <div class="menu-item">→ SLA</div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<div class="breadcrumb">
+Accueil › ITSM — Support IT › Tableau de bord
+</div>
+
+<div class="page-header">
+  <div>
+    <h1>Tableau de bord — Support IT</h1>
+    <div class="subtitle">Bienvenue Jean-Baptiste — 29 avril 2025</div>
+  </div>
+  <div class="button">+ Nouveau ticket</div>
+</div>
+
+<!-- KPI -->
+<div class="kpi-row">
+  <div class="kpi">
+    <div>Tickets ouverts</div>
+    <div class="kpi-value">23</div>
+    <div style="color:red">+3 aujourd'hui</div>
+  </div>
+  <div class="kpi">
+    <div>MTTR moyen</div>
+    <div class="kpi-value">3h 42m</div>
+    <div style="color:green">↓ 12%</div>
+  </div>
+  <div class="kpi">
+    <div>SLA compliance</div>
+    <div class="kpi-value">94,2 %</div>
+    <div style="color:green">↑ 1,2%</div>
+  </div>
+  <div class="kpi">
+    <div>Tickets résolus (30j)</div>
+    <div class="kpi-value">187</div>
+    <div style="color:green">↑ 8%</div>
+  </div>
+</div>
+
+<!-- ROW 2 -->
+<div class="row">
+  <div>
+    <div class="alert red">
+      🔴 INC-2025-0851 — SLA dépassé dans 1h 05m
+    </div>
+    <div class="alert orange">
+      🟡 INC-2025-0847 — SLA dans 4h 12m
     </div>
   </div>
-  <div class="sb-grp">
-    <div class="sb-lbl">Gestion financière</div>
-    <div class="sb-i">
-      <svg viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-      Finance
-    </div>
-    <div class="sb-i">
-      <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-      Achats
-    </div>
-    <div class="sb-i">
-      <svg viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-      Ventes
-    </div>
-    <div class="sb-i">
-      <svg viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-      Stocks
+
+  <div class="kpi">
+    <div>Répartition par module</div>
+    <div style="margin-top:10px;">
+      Finance 34%<br>
+      Achats 22%<br>
+      Stocks 18%<br>
+      Production 14%<br>
+      RH 7%<br>
+      Autre 5%
     </div>
   </div>
-  <div class="sb-grp">
-    <div class="sb-lbl">Opérations</div>
-    <div class="sb-i">
-      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
-      Production
-    </div>
-    <div class="sb-i">
-      <svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-      Ressources humaines
-    </div>
-    <div class="sb-i">
-      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-      Infrastructure
-    </div>
-    <div class="sb-i">
-      <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-      Sécurité
-    </div>
-    <div class="sb-i">
-      <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-      Reporting &amp; BI
-    </div>
-  </div>
-  <div class="sb-grp">
-    <div class="sb-lbl">Support IT</div>
-    <div class="sb-i active">
-      <svg viewBox="0 0 24 24"><path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-      ITSM — Support IT
-      <span class="sb-bdg">5</span>
-    </div>
-    <div class="sb-sub active">Tableau de bord</div>
-    <div class="sb-sub">Mes tickets <span class="cnt">23</span></div>
-    <div class="sb-sub">Tous les tickets</div>
-    <div class="sb-sub">Nouveau ticket</div>
-    <div class="sb-sub">Base de connaissances</div>
-    <div class="sb-sub">Rapports SLA</div>
-    <div class="sb-sub">Escalades <span class="cnt">2</span></div>
-    <div class="sb-sub">Configuration ITSM</div>
-  </div>
-  <div class="sb-grp">
-    <div class="sb-lbl">Administration</div>
-    <div class="sb-i">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-      Paramétrage
-    </div>
-    <div class="sb-i">
-      <svg viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-      Utilisateurs &amp; rôles
-    </div>
-    <div class="sb-i">
-      <svg viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-      Imports / Exports
-    </div>
-  </div>
-</nav>
+</div>
 
-<!-- MAIN -->
-<div class="main">
+<!-- TABLE -->
+<table>
+<thead>
+<tr>
+<th>☐</th>
+<th>N° Ticket</th>
+<th>Titre</th>
+<th>Module</th>
+<th>Priorité</th>
+<th>Statut</th>
+<th>SLA</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>☐</td><td>INC-0851</td><td>Validation achat</td><td>Achats</td><td>🔴P1</td><td>Escaladé</td><td>1h05</td><td>👁 ✏</td></tr>
+<tr><td>☐</td><td>INC-0847</td><td>Export PDF</td><td>Finance</td><td>🟡P2</td><td>En cours</td><td>4h12</td><td>👁 ✏</td></tr>
+</tbody>
+</table>
 
-  <!-- BREADCRUMB -->
-  <div class="bc">
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#6B6B6B" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-    <span class="bc-link">Accueil</span>
-    <span class="bc-sep">›</span>
-    <span class="bc-link">ITSM — Support IT</span>
-    <span class="bc-sep">›</span>
-    <span class="bc-active">Tableau de bord</span>
-  </div>
+<div class="footer">
+Dernière mise à jour : il y a 3 min — Actualiser
+</div>
 
-  <!-- CONTENT -->
-  <div class="ct">
+</div>
+</div>
 
-    <!-- PAGE HEADER -->
-    <div class="pg-hdr">
-      <div>
-        <div class="pg-title">Tableau de bord — Support IT</div>
-        <div class="pg-sub">Bienvenue Jean-Baptiste &nbsp;—&nbsp; 29 avril 2025</div>
-      </div>
-      <div class="pg-acts">
-        <div class="flt-grp">
-          <button class="flt-btn">Aujourd'hui</button>
-          <button class="flt-btn on">7 jours ✓</button>
-          <button class="flt-btn">30 jours</button>
-          <button class="flt-btn">Personnalisé</button>
-        </div>
-        <button class="btn-primary">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-          Nouveau ticket
-        </button>
-      </div>
-    </div>
-
-    <!-- KPI ROW -->
-    <div class="kpi-row">
-      <div class="kpi">
-        <div class="kpi-top">
-          <div class="kpi-lbl">Tickets ouverts</div>
-          <div class="kpi-ico red">
-            <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-          </div>
-        </div>
-        <div class="kpi-val">23</div>
-        <span class="bdg bdg-red">+3 aujourd'hui</span>
-      </div>
-      <div class="kpi">
-        <div class="kpi-top">
-          <div class="kpi-lbl">MTTR moyen</div>
-          <div class="kpi-ico">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-        </div>
-        <div class="kpi-val">3h 42m</div>
-        <span class="bdg bdg-green">↓ 12%</span>
-      </div>
-      <div class="kpi">
-        <div class="kpi-top">
-          <div class="kpi-lbl">SLA Compliance</div>
-          <div class="kpi-ico">
-            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          </div>
-        </div>
-        <div class="kpi-val">94,2%</div>
-        <span class="bdg bdg-green">↑ 1,2%</span>
-      </div>
-      <div class="kpi">
-        <div class="kpi-top">
-          <div class="kpi-lbl">Tickets résolus (30j)</div>
-          <div class="kpi-ico">
-            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-          </div>
-        </div>
-        <div class="kpi-val">187</div>
-        <span class="bdg bdg-green">↑ 8%</span>
-      </div>
-    </div>
-
-    <!-- ROW 2 -->
-    <div class="row2">
-
-      <!-- Alertes SLA -->
-      <div class="card">
-        <div class="card-ttl">
-          <div class="ttl-dot" style="background:#E24B4A;"></div>
-          Alertes SLA actives
-        </div>
-        <div class="alert a-red">
-          <div class="a-info">
-            <div class="a-row1">
-              <span class="a-id">INC-2025-0851</span>
-              <span class="pill pill-red">P1 Critique</span>
-            </div>
-            <div class="a-title">Validation bon achat impossible</div>
-            <div class="a-sla">SLA dépassé dans <strong style="color:#A32D2D;">1h 05m</strong></div>
-            <div class="sla-bar"><div class="sla-fill f-red"></div></div>
-          </div>
-          <button class="btn-xs btn-danger">Traiter maintenant →</button>
-        </div>
-        <div class="alert a-amb">
-          <div class="a-info">
-            <div class="a-row1">
-              <span class="a-id">INC-2025-0847</span>
-              <span class="pill pill-amb">P2 Majeur</span>
-            </div>
-            <div class="a-title">Export PDF factures Finance</div>
-            <div class="a-sla">SLA dans <strong style="color:#854F0B;">4h 12m</strong></div>
-            <div class="sla-bar"><div class="sla-fill f-amb"></div></div>
-          </div>
-          <button class="btn-xs btn-out">Voir le ticket →</button>
-        </div>
-      </div>
-
-      <!-- Donut -->
-      <div class="card">
-        <div class="card-ttl">
-          <div class="ttl-dot"></div>
-          Répartition par module
-        </div>
-        <div class="donut-wrap">
-          <svg width="96" height="96" viewBox="0 0 96 96" style="flex-shrink:0;">
-            <circle cx="48" cy="48" r="36" fill="none" stroke="#00B050" stroke-width="17" stroke-dasharray="76.7 158.9" stroke-dashoffset="0" transform="rotate(-90 48 48)"/>
-            <circle cx="48" cy="48" r="36" fill="none" stroke="#0F6E56" stroke-width="17" stroke-dasharray="49.6 158.9" stroke-dashoffset="-76.7" transform="rotate(-90 48 48)"/>
-            <circle cx="48" cy="48" r="36" fill="none" stroke="#639922" stroke-width="17" stroke-dasharray="40.6 158.9" stroke-dashoffset="-126.3" transform="rotate(-90 48 48)"/>
-            <circle cx="48" cy="48" r="36" fill="none" stroke="#97C459" stroke-width="17" stroke-dasharray="31.6 158.9" stroke-dashoffset="-166.9" transform="rotate(-90 48 48)"/>
-            <circle cx="48" cy="48" r="36" fill="none" stroke="#C0DD97" stroke-width="17" stroke-dasharray="15.8 158.9" stroke-dashoffset="-198.5" transform="rotate(-90 48 48)"/>
-            <circle cx="48" cy="48" r="36" fill="none" stroke="#D9D9D6" stroke-width="17" stroke-dasharray="11.3 158.9" stroke-dashoffset="-214.3" transform="rotate(-90 48 48)"/>
-            <text x="48" y="45" text-anchor="middle" font-size="13" font-weight="700" fill="#2E4057" font-family="Nunito Sans,sans-serif">23</text>
-            <text x="48" y="56" text-anchor="middle" font-size="8" fill="#6B6B6B" font-family="Open Sans,sans-serif">tickets</text>
-          </svg>
-          <div class="legend">
-            <div class="leg-i"><span class="leg-dot" style="background:#00B050;"></span>Finance<span class="leg-pct">34%</span></div>
-            <div class="leg-i"><span class="leg-dot" style="background:#0F6E56;"></span>Achats<span class="leg-pct">22%</span></div>
-            <div class="leg-i"><span class="leg-dot" style="background:#639922;"></span>Stocks<span class="leg-pct">18%</span></div>
-            <div class="leg-i"><span class="leg-dot" style="background:#97C459;"></span>Production<span class="leg-pct">14%</span></div>
-            <div class="leg-i"><span class="leg-dot" style="background:#C0DD97;"></span>RH<span class="leg-pct">7%</span></div>
-            <div class="leg-i"><span class="leg-dot" style="background:#D9D9D6;"></span>Autre<span class="leg-pct">5%</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TABLE -->
-    <div class="tbl-card">
-      <div class="tbl-hdr">
-        <div class="tbl-ttl"><div class="ttl-dot"></div>Mes tickets assignés</div>
-        <div class="tbl-acts">
-          <button class="tbl-btn"><svg viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg>Filtrer</button>
-          <button class="tbl-btn"><svg viewBox="0 0 24 24"><path d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M8 12l4 4 4-4M12 4v12"/></svg>Exporter</button>
-        </div>
-      </div>
-      <table>
-        <colgroup>
-          <col class="c-chk"><col class="c-id"><col class="c-ttl"><col class="c-mod">
-          <col class="c-prio"><col class="c-stat"><col class="c-sla"><col class="c-act">
-        </colgroup>
-        <thead>
-          <tr>
-            <th></th>
-            <th>N° Ticket</th>
-            <th>Titre</th>
-            <th>Module</th>
-            <th>Priorité</th>
-            <th>Statut</th>
-            <th>SLA restant</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td><span class="mono">INC-2025-0851</span></td>
-            <td><div class="td-title">Validation bon achat impossible</div></td>
-            <td><span class="mod-tag">Achats</span></td>
-            <td><span class="pb pb-p1">P1 Critique</span></td>
-            <td><span class="stb st-esc"><span class="st-dot d-red"></span>Escaladé</span></td>
-            <td><div class="sla-cell"><div class="sla-wrap"><div class="sla-m" style="width:18%;background:#E24B4A;"></div></div><span class="sla-t" style="color:#A32D2D;font-weight:600;">1h 05m</span></div></td>
-            <td><div class="ra"><button class="ra-btn"><svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button><button class="ra-btn"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td><span class="mono">INC-2025-0847</span></td>
-            <td><div class="td-title">Export PDF factures inopérant</div></td>
-            <td><span class="mod-tag">Finance</span></td>
-            <td><span class="pb pb-p2">P2 Majeur</span></td>
-            <td><span class="stb st-enc"><span class="st-dot d-amb"></span>En cours</span></td>
-            <td><div class="sla-cell"><div class="sla-wrap"><div class="sla-m" style="width:46%;background:#EF9F27;"></div></div><span class="sla-t">4h 12m</span></div></td>
-            <td><div class="ra"><button class="ra-btn"><svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button><button class="ra-btn"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td><span class="mono">INC-2025-0838</span></td>
-            <td><div class="td-title">Champ TVA mal calculé</div></td>
-            <td><span class="mod-tag">Finance</span></td>
-            <td><span class="pb pb-p3">P3 Mineur</span></td>
-            <td><span class="stb st-ouv"><span class="st-dot d-blu"></span>Ouvert</span></td>
-            <td><div class="sla-cell"><div class="sla-wrap"><div class="sla-m" style="width:82%;background:#00B050;"></div></div><span class="sla-t">2j 14h</span></div></td>
-            <td><div class="ra"><button class="ra-btn"><svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button><button class="ra-btn"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td><span class="mono">INC-2025-0829</span></td>
-            <td><div class="td-title">Lenteur critique module stocks</div></td>
-            <td><span class="mod-tag">Stocks</span></td>
-            <td><span class="pb pb-p2">P2 Majeur</span></td>
-            <td><span class="stb st-enc"><span class="st-dot d-amb"></span>En cours</span></td>
-            <td><div class="sla-cell"><div class="sla-wrap"><div class="sla-m" style="width:55%;background:#EF9F27;"></div></div><span class="sla-t">5h 22m</span></div></td>
-            <td><div class="ra"><button class="ra-btn"><svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button><button class="ra-btn"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td><span class="mono">INC-2025-0821</span></td>
-            <td><div class="td-title">Erreur import fournisseurs</div></td>
-            <td><span class="mod-tag">Achats</span></td>
-            <td><span class="pb pb-p3">P3 Mineur</span></td>
-            <td><span class="stb st-res"><span class="st-dot d-grn"></span>Résolu</span></td>
-            <td><span class="sla-ok">Résolu</span></td>
-            <td><div class="ra"><button class="ra-btn"><svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button><button class="ra-btn"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button></div></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td><span class="mono">INC-2025-0815</span></td>
-            <td><div class="td-title">Configuration imprimante réseau</div></td>
-            <td><span class="mod-tag">Infra</span></td>
-            <td><span class="pb pb-p3">P3 Mineur</span></td>
-            <td><span class="stb st-res"><span class="st-dot d-grn"></span>Résolu</span></td>
-            <td><span class="sla-ok">Résolu</span></td>
-            <td><div class="ra"><button class="ra-btn"><svg viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></button><button class="ra-btn"><svg viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button></div></td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="tbl-ftr">
-        <span>Affichage <strong>6</strong> sur <strong>23</strong> tickets</span>
-        <span class="lnk">Voir tous les tickets →</span>
-      </div>
-    </div>
-
-    <!-- BAR CHART -->
-    <div class="chart-card">
-      <div class="chart-hdr">
-        <div class="chart-ttl"><div class="ttl-dot"></div>Volume tickets — 7 derniers jours</div>
-        <span style="font-size:10.5px;color:#6B6B6B;">Lun 21 → Dim 27 avr. 2025</span>
-      </div>
-      <div class="bars">
-        <div class="bar-col"><span class="bar-v">12</span><div class="bar-r" style="height:42px;background:#00B050;"></div><span class="bar-l">Lun 21</span></div>
-        <div class="bar-col"><span class="bar-v">18</span><div class="bar-r" style="height:63px;background:#00B050;"></div><span class="bar-l">Mar 22</span></div>
-        <div class="bar-col"><span class="bar-v">9</span><div class="bar-r" style="height:31px;background:#00B050;"></div><span class="bar-l">Mer 23</span></div>
-        <div class="bar-col"><span class="bar-v">23</span><div class="bar-r" style="height:72px;background:#0F6E56;"></div><span class="bar-l">Jeu 24</span></div>
-        <div class="bar-col"><span class="bar-v">15</span><div class="bar-r" style="height:52px;background:#00B050;"></div><span class="bar-l">Ven 25</span></div>
-        <div class="bar-col"><span class="bar-v">4</span><div class="bar-r" style="height:14px;background:#97C459;"></div><span class="bar-l">Sam 26</span></div>
-        <div class="bar-col"><span class="bar-v">2</span><div class="bar-r" style="height:7px;background:#97C459;"></div><span class="bar-l">Dim 27</span></div>
-      </div>
-      <div class="chart-leg">
-        <div class="cl-i"><span class="cl-dot" style="background:#00B050;"></span>Tickets créés</div>
-        <div class="cl-i"><span class="cl-dot" style="background:#0F6E56;"></span>Pic journalier</div>
-        <div class="cl-i"><span class="cl-dot" style="background:#97C459;"></span>Week-end</div>
-      </div>
-    </div>
-
-    <!-- PAGE FOOTER -->
-    <div class="pg-ftr">
-      <span>Dernière mise à jour : il y a 3 min</span>
-      <button class="ref-btn">↻ Actualiser</button>
-    </div>
-
-  </div><!-- /ct -->
-</div><!-- /main -->
-</div><!-- /body -->
-</div><!-- /shell -->
 </body>
 </html>
